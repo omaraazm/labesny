@@ -7,6 +7,12 @@ struct HomeView: View {
     @State private var location: String = ""
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
+    @State private var selectedOutfit: (shirt: ClothingItem, pants: ClothingItem)?
+    
+    private func getRandomOutfit() -> (shirt: ClothingItem, pants: ClothingItem)? {
+        return allMatchingOutfits.randomElement()
+    }
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -89,7 +95,10 @@ struct HomeView: View {
                          Spacer()
                          */
                         
-                        NavigationLink(destination: ContentView()) {
+                        NavigationLink(destination: ContentView(
+                            shirt: selectedOutfit?.shirt,
+                            pants: selectedOutfit?.pants
+                        )) {
                             Text("G E N E R A T E ")
                                 .font(Font.custom("Helvetica", size: 12).weight(.semibold))
                                 .padding()
@@ -97,6 +106,9 @@ struct HomeView: View {
                                 .cornerRadius(12)
                         }
                         .frame(height: 40)
+                        .simultaneousGesture(TapGesture().onEnded {
+                            selectedOutfit = getRandomOutfit()
+                        })
                     }
                     .padding(24)
                     .frame(height: 322)

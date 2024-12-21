@@ -9,6 +9,7 @@ enum DressCode {
 enum ClothingType {
     case shirt
     case pants
+    case hoodie
 }
 
 enum ClothingFit {
@@ -22,7 +23,7 @@ struct ClothingItem: Hashable {
     let color: String
     let code: DressCode
     //let fit: ClothingFit
-    
+
     // Helper method to sort items
     var isShirt: Bool {
         return type == .shirt
@@ -112,3 +113,12 @@ matchingOutfits.forEach { outfit in
     print("\(outfit.shirt.color) \(outfit.shirt.code) shirt with \(outfit.pants.color) \(outfit.pants.code) pants")
 }
 */
+
+// Add this after the existing items declaration
+let allMatchingOutfits: [(shirt: ClothingItem, pants: ClothingItem)] = {
+    let matches = findMatchingOutfits(from: items)
+    print("Matching outfits: \(matches)")
+    return matches
+}()
+
+// You can comment out or remove the previous test print section since we'll use this data directly

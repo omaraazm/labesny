@@ -8,9 +8,10 @@
 import SwiftUI
 
 struct ContentView: View {
-
+    let shirt: ClothingItem?
+    let pants: ClothingItem?
+    
     let itemName = ["tshirt", "tshirt", "tshirt"]
-       // "globe", , "tshirt.circle.fill", "cirlcle.square"]
     let mainColor = Color(red: 0/255, green: 0/255, blue: 0/255)
 
     var body: some View {
@@ -28,17 +29,24 @@ struct ContentView: View {
                     Spacer()
                 }
                 VStack {
-                    ForEach(0..<itemName.count, id: \.self) { index in
-                        NavigationLink(
-                            destination: ItemView(itemName: itemName[index], imageName: itemName[index]),
-                            label: {
-                                Image(systemName: itemName[index])
-                                    .padding()
-                                    .font(.custom("Helvetica", size: 80))
-                                    .foregroundColor(.white)
-                            }
-                        )
+                    if let shirt = shirt {
+                        Text("\(shirt.color) \(shirt.code) shirt")
+                            .padding()
+                            .font(.custom("Helvetica", size: 20))
+                            .foregroundColor(.white)
                     }
+                    
+                    if let pants = pants {
+                        Text("\(pants.color) \(pants.code) pants")
+                            .padding()
+                            .font(.custom("Helvetica", size: 20))
+                            .foregroundColor(.white)
+                    }
+                    
+                    Image(systemName: "tshirt")
+                        .padding()
+                        .font(.custom("Helvetica", size: 80))
+                        .foregroundColor(.white)
                 }
                 .foregroundColor(.white)
             }
@@ -48,6 +56,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        ContentView()
+        ContentView(shirt: nil, pants: nil)
     }
 }
