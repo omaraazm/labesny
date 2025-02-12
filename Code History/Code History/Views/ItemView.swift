@@ -10,7 +10,8 @@ import SwiftUI
 struct ItemView: View {
   let itemName: String
   let imageName: String
-    @State private var isAnimating = false  // Add this line
+  let description: String
+  @State private var isAnimating = false
 
   
   var body: some View {
@@ -25,7 +26,7 @@ struct ItemView: View {
         .font(.custom("Helvetica", size: 200))
         .padding()
         Spacer()
-      Text("This is a desription of the item Or any facts you want to write about it. Ay 7aga 3ayez tektebha mel akher...")
+      Text(description)
         .font(.custom("Helvetica", size: 15))
         .foregroundColor(Color(red: 0.44, green: 0.45, blue: 0.48))
         .frame(width: 300)
@@ -42,6 +43,6 @@ struct ItemView: View {
 
 struct ItemView_Previews: PreviewProvider {
     static var previews: some View {
-        ItemView(itemName: "tshirt", imageName: "tshirt")
+        ItemView(itemName: "tshirt", imageName: "tshirt", description: "This is a desription of the item Or any facts you want to write about it. Ay 7aga 3ayez tektebha mel akher...")
     }
 }

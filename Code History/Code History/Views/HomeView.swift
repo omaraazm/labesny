@@ -9,9 +9,7 @@ struct HomeView: View {
     @State private var endDate: Date = Date()
     @State private var selectedOutfit: (shirt: ClothingItem, pants: ClothingItem)?
     
-    private func getRandomOutfit() -> (shirt: ClothingItem, pants: ClothingItem)? {
-        return allMatchingOutfits.randomElement()
-    }
+
     
     var body: some View {
         NavigationStack {
@@ -26,16 +24,19 @@ struct HomeView: View {
                         }
                         Spacer()
                     }
-                    .offset(y: -180)
+                    .offset(y: -130)
                     .padding(.horizontal)
                     
                     // Main Content
                     VStack(spacing: 32) {
                         ZStack {
-                            Image(systemName: "globe")
-                                .imageScale(.large)
+                            NavigationLink(destination: WardrobeView()) {
+                                Image(systemName: "globe")
+                                    .imageScale(.large)
+                            }
                         }
                         .padding(40)
+                        //Spacer(minLength: 400)
                         
                         VStack(alignment: .leading, spacing: 8) {
                             Text("TextTextText. TextText.")
@@ -45,7 +46,7 @@ struct HomeView: View {
                                 .font(Font.custom("Helvetica", size: 14))
                                 .foregroundColor(Color(red: 0.44, green: 0.45, blue: 0.48))
                         }
-                        Spacer()
+                        //Spacer()
                         
                         VStack(alignment: .leading) {
                             Text("\(Int(temperature))°C")
@@ -71,62 +72,68 @@ struct HomeView: View {
                             get: { location },
                             set: { location = $0.uppercased() }
                         ))
-                            .font(Font.custom("Helvetica", size: 14))
-                            .textFieldStyle(RoundedBorderTextFieldStyle())
-                            .padding(.horizontal)
-                            .onSubmit {
-                                Task {
-                                    await weatherService
-                                        .getWeatherByCity(city: location)
-                                    if let weatherTemp = weatherService.temperature {
-                                        temperature = weatherTemp
-                                    }
+                        .font(Font.custom("Helvetica", size: 14))
+                        .textFieldStyle(RoundedBorderTextFieldStyle())
+                        .padding(.horizontal)
+                        .onSubmit {
+                            Task {
+                                await weatherService
+                                    .getWeatherByCity(city: location)
+                                if let weatherTemp = weatherService.temperature {
+                                    temperature = weatherTemp
                                 }
                             }
+                        }
                         
                         /*
-                        DatePicker("START", selection: $startDate, in: Date()..., displayedComponents: .date)
-                            .datePickerStyle(.compact)
-                        DatePicker("END", selection: $endDate, in: startDate..., displayedComponents: .date)
-                            .datePickerStyle(.compact)
-                        Spacer()
+                         DatePicker("START", selection: $startDate, in: Date()..., displayedComponents: .date)
+                         .datePickerStyle(.compact)
+                         DatePicker("END", selection: $endDate, in: startDate..., displayedComponents: .date)
+                         .datePickerStyle(.compact)
+                         Spacer()
                          }
                          .datePickerStyle(.graphical)
                          Spacer()
                          */
-                        
-                        NavigationLink(destination: ContentView(
-                            shirt: selectedOutfit?.shirt,
-                            pants: selectedOutfit?.pants
-                        )) {
+                    }
+                    .offset(y: 50)
+                    VStack {
+                        NavigationLink(destination: ContentView(outfit: selectedOutfit)) {
                             Text("G E N E R A T E ")
                                 .font(Font.custom("Helvetica", size: 12).weight(.semibold))
+                                .foregroundColor(.black)
                                 .padding()
                                 .frame(maxWidth: .infinity)
                                 .cornerRadius(12)
                         }
-                        .frame(height: 40)
                         .simultaneousGesture(TapGesture().onEnded {
-                            selectedOutfit = getRandomOutfit()
+                            Task {
+                                do {
+                                    let wardrobeService = WardrobeService()
+                                    let randomOutfit = try await wardrobeService.fetchRandomOutfit()
+                                    selectedOutfit = randomOutfit
+                                } catch {
+                                    print("Error fetching random outfit: \(error)")
+                                }
+                            }
                         })
+                        .padding(24)
+                        .frame(height: 10)
+                        .offset(y: 90)
                     }
-                    .padding(24)
-                    .frame(height: 322)
-                    .offset(y: 50)
-                    
-                    //Spacer()
-                    
-                    // Bottom Navigation Bar
-                    // Status Bar
-                    // Title
+                        //Spacer()
+                        
+                        // Bottom Navigation Bar
+                        // Status Bar
+                        // Title
+                    }
                 }
             }
         }
     }
-}
 
 
-struct TripView_Previews: PreviewProvider {
+struct HomeView_Previews: PreviewProvider {
     static var previews: some View {
         HomeView()
     }

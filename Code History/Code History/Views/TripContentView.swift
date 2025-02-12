@@ -11,8 +11,8 @@ struct TripContentView: View {
     let mainColor = Color.black
     private let hSpacing: CGFloat = 10
     
-    private let firstRowImages: [String] = ["tshirt.circle.fill", "photo.circle", "globe", "airplane.departure"]
-    private let secondRowImages: [String] = ["tshirt","airplane.departure", "globe", "hanger"]
+    private let firstRowImages: [String] = ["tshirt.circle.fill", "photo.circle", "globe", "skew"]
+    private let secondRowImages: [String] = ["tshirt","photo", "globe", "hanger"]
     private let thirdRowImages: [String] = ["shoe.circle", "tshirt.fill", "shoe.circle.fill",  "shoeprints.fill"]
     
     var body: some View {

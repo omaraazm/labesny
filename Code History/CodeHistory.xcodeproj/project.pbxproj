@@ -29,9 +29,22 @@
 		4F88A0AB2D08BC5000960FDF /* labesnyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = labesnyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		4FACD47D2D59431F0086E4B4 /* Exceptions for "Code History" folder in "labesny" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				Info.plist,
+			);
+			target = 4F88A08F2D08BC4E00960FDF /* labesny */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		4F88A0922D08BC4E00960FDF /* Code History */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				4FACD47D2D59431F0086E4B4 /* Exceptions for "Code History" folder in "labesny" target */,
+			);
 			path = "Code History";
 			sourceTree = "<group>";
 		};
@@ -186,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "labesny" */;
+			buildConfigurationList = 4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "CodeHistory" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -321,6 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "/Users/omaraboulazm/Documents/labesny/Code History/Code History/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -376,6 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = "/Users/omaraboulazm/Documents/labesny/Code History/Code History/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -508,7 +523,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
@@ -529,7 +544,7 @@
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				GENERATE_INFOPLIST_FILE = YES;
+				GENERATE_INFOPLIST_FILE = NO;
 				IPHONEOS_DEPLOYMENT_TARGET = 18.1;
 				MACOSX_DEPLOYMENT_TARGET = 15.1;
 				MARKETING_VERSION = 1.0;
@@ -548,7 +563,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "labesny" */ = {
+		4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "CodeHistory" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F88A0B32D08BC5000960FDF /* Debug */,

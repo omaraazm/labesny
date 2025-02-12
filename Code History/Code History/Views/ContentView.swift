@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct ContentView: View {
-    let shirt: ClothingItem?
-    let pants: ClothingItem?
     
-    let itemName = ["tshirt", "tshirt", "tshirt"]
+    let itemName = "tshirt"
     let mainColor = Color(red: 0/255, green: 0/255, blue: 0/255)
-
+    var outfit: (shirt: ClothingItem, pants: ClothingItem)?
+    
     var body: some View {
         NavigationStack {
             ZStack {
@@ -26,36 +25,48 @@ struct ContentView: View {
                         .padding()
                         .font(.custom("Helvetica", size: 20))
                         .foregroundColor(.white)
-                    Spacer()
                 }
-                VStack {
-                    if let shirt = shirt {
-                        Text("\(shirt.color) \(shirt.code) shirt")
-                            .padding()
-                            .font(.custom("Helvetica", size: 20))
-                            .foregroundColor(.white)
-                    }
-                    
-                    if let pants = pants {
-                        Text("\(pants.color) \(pants.code) pants")
-                            .padding()
-                            .font(.custom("Helvetica", size: 20))
-                            .foregroundColor(.white)
-                    }
-                    
-                    Image(systemName: "tshirt")
+                .offset(y: -330)
+                VStack{
+                    if let outfit = outfit{
+                        NavigationLink(destination: ItemView(itemName: itemName, imageName: itemName, description: "You should be looking at a \(outfit.shirt.color) \(outfit.shirt.type). This is a \(outfit.pants.dresscode) shirt, so mind the occassion you are wearing it to. The \(outfit.pants.fit) fit enhances your silhouette. Have fun!")) {
+                            VStack {
+                                Image(systemName: itemName)
+                                    .font(.custom("Helvetica", size: 100))
+                                    .foregroundColor(.white)
+                                    .padding()
+                                /*Text("This is a \(outfit.shirt.fit) \(outfit.shirt.color) \(outfit.shirt.type) (\(outfit.shirt.dresscode)).")
+                                    .font(.custom("Helvetica", size: 14))
+                                    .foregroundColor(.white)
+                                 */
+                            }
+                        }
                         .padding()
-                        .font(.custom("Helvetica", size: 80))
-                        .foregroundColor(.white)
-                }
-                .foregroundColor(.white)
-            }
-        }
-    }
-}
+                    } else {
+                        Text("Loading...")
+                    }
 
-struct ContentView_Previews: PreviewProvider {
-    static var previews: some View {
-        ContentView(shirt: nil, pants: nil)
+                    if let outfit = outfit {
+                        NavigationLink(destination: ItemView(itemName: "PANTS", imageName: "skew", description: "You should be looking at a pair of \(outfit.pants.color) \(outfit.pants.type). They are a \(outfit.pants.dresscode) pair of pants, so mind the occassion you are wearing them to. The \(outfit.pants.fit) fit defines your silhouette. Have fun!")) {
+                            VStack {
+                                Image(systemName: "skew")
+                                    .font(.custom("Helvetica", size: 100))
+                                    .foregroundColor(.white)
+                                    .padding()
+                                    /*Text("This is a \(outfit.pants.fit) \(outfit.pants.color) \(outfit.pants.type) (\(outfit.pants.dresscode)).")
+                                        .font(.custom("Helvetica", size: 14))
+                                        .foregroundColor(.white)
+                                     */
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }    
+    struct ContentView_Previews: PreviewProvider {
+        static var previews: some View {
+            ContentView()
+        }
     }
 }

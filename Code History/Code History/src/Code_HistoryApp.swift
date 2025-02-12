@@ -12,6 +12,7 @@ struct Code_HistoryApp: App {
     var body: some Scene {
         WindowGroup {
             LoginView()
+                .preferredColorScheme(.light)
         }
     }
 }
