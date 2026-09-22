@@ -135,13 +135,15 @@ struct AddItemDrawer: View {
                                 type: selectedType.rawValue,
                                 color: selectedColor,
                                 dresscode: selectedDresscode.rawValue,
-                                fit: selectedFit.rawValue
-                                //imageURL: uploadedImageURL
+                                fit: selectedFit.rawValue,
+                                imageURL: uploadedImageURL
                             )
-                            
+
+                            uploadError = nil
                             try await wardrobeService.addItem(newItem)
                             dismiss()
                         } catch {
+                            uploadError = "Failed to add item. Please check your input and try again."
                             print("Error adding item: \(error)")
                         }
                     }

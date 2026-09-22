@@ -9,7 +9,6 @@ import SwiftUI
 
 struct WardrobeView: View {
     @StateObject private var wardrobeService = WardrobeService()
-    @State private var items: [ClothingItem] = []
     @StateObject private var weatherService = WeatherService.shared
     @State private var temperature: Double = -20
     @State private var isSidebarOpen = false
@@ -106,17 +105,45 @@ struct WardrobeView: View {
                     Spacer()
                                         
                     // Scrollable list of items
-                    ScrollView {
-                        VStack(spacing: 10) {
-                            ForEach(items, id: \.self) { item in
+                    List {
+                        ForEach(wardrobeService.items) { item in
+                            HStack {
+                                if let imageURLString = item.imageURL, let imageURL = URL(string: imageURLString) {
+                                    AsyncImage(url: imageURL) { image in
+                                        image.resizable().scaledToFill()
+                                    } placeholder: {
+                                        Image(systemName: item.type == "shirt" ? "tshirt" : "skew")
+                                            .foregroundColor(.white)
+                                    }
+                                    .frame(width: 36, height: 36)
+                                    .clipped()
+                                } else {
+                                    Image(systemName: item.type == "shirt" ? "tshirt" : "skew")
+                                        .foregroundColor(.white)
+                                        .frame(width: 36, height: 36)
+                                }
                                 Text("\(item.fit) \(item.color) \(item.type) (\(item.dresscode))")
                                     .font(.custom("Helvetica", size: 14))
                                     .foregroundColor(.white)
                             }
+                                .listRowBackground(Color.clear)
+                                .swipeActions {
+                                    Button(role: .destructive) {
+                                        Task {
+                                            do {
+                                                try await wardrobeService.removeItem(id: item.id)
+                                            } catch {
+                                                print("Error removing item: \(error)")
+                                            }
+                                        }
+                                    } label: {
+                                        Label("Delete", systemImage: "trash")
+                                    }
+                                }
                         }
-                        .padding()
-                        
                     }
+                    .listStyle(.plain)
+                    .scrollContentBackground(.hidden)
                     .offset(y: 20)
                     .frame(maxHeight: 600)
                     
@@ -159,7 +186,6 @@ struct WardrobeView: View {
         .task {
             do {
                 try await wardrobeService.fetchItems()
-                items = wardrobeService.items
             } catch {
                 print("Error fetching items: \(error)")
             }

@@ -18,7 +18,7 @@ class WeatherService: ObservableObject {
     @Published var isLoading = false
     @Published var error: String?
     
-    private let apiKey = "54465babc5c87eefaefbd2066dae3f34"
+    private let apiKey = Secrets.openWeatherMapAPIKey
     
     init() {}
     

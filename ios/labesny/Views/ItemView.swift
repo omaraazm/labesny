@@ -11,9 +11,10 @@ struct ItemView: View {
   let itemName: String
   let imageName: String
   let description: String
+  var imageURL: String? = nil
   @State private var isAnimating = false
 
-  
+
   var body: some View {
     VStack {
         Spacer()
@@ -22,9 +23,20 @@ struct ItemView: View {
         .symbolEffect(.bounce, options: .repeating, value: isAnimating)
         .onAppear { isAnimating = true }  // Start animation when view appears
         .padding()
-      Image(systemName: imageName)
-        .font(.custom("Helvetica", size: 200))
-        .padding()
+      if let imageURLString = imageURL, let url = URL(string: imageURLString) {
+          AsyncImage(url: url) { image in
+              image.resizable().scaledToFit()
+          } placeholder: {
+              Image(systemName: imageName)
+                  .font(.custom("Helvetica", size: 200))
+          }
+          .frame(width: 200, height: 200)
+          .padding()
+      } else {
+          Image(systemName: imageName)
+            .font(.custom("Helvetica", size: 200))
+            .padding()
+      }
         Spacer()
       Text(description)
         .font(.custom("Helvetica", size: 15))

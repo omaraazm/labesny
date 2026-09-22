@@ -8,6 +8,7 @@ struct HomeView: View {
     @State private var startDate: Date = Date()
     @State private var endDate: Date = Date()
     @State private var selectedOutfit: (shirt: ClothingItem, pants: ClothingItem)?
+    @State private var outfitFetchFailed: Bool = false
     
 
     
@@ -98,7 +99,7 @@ struct HomeView: View {
                     }
                     .offset(y: 50)
                     VStack {
-                        NavigationLink(destination: ContentView(outfit: selectedOutfit)) {
+                        NavigationLink(destination: ContentView(outfit: selectedOutfit, fetchFailed: outfitFetchFailed)) {
                             Text("G E N E R A T E ")
                                 .font(Font.custom("Helvetica", size: 12).weight(.semibold))
                                 .foregroundColor(.black)
@@ -108,12 +109,15 @@ struct HomeView: View {
                         }
                         .simultaneousGesture(TapGesture().onEnded {
                             Task {
+                                outfitFetchFailed = false
                                 do {
                                     let wardrobeService = WardrobeService()
                                     let randomOutfit = try await wardrobeService.fetchRandomOutfit()
                                     selectedOutfit = randomOutfit
                                 } catch {
                                     print("Error fetching random outfit: \(error)")
+                                    selectedOutfit = nil
+                                    outfitFetchFailed = true
                                 }
                             }
                         })

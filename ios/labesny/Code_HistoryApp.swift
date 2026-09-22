@@ -11,7 +11,7 @@ import SwiftUI
 struct Code_HistoryApp: App {
     var body: some Scene {
         WindowGroup {
-            LoginView()
+            HomeView()
                 .preferredColorScheme(.light)
         }
     }

@@ -8,25 +8,28 @@
 import Foundation
 
 class WardrobeService: ObservableObject {
-    private let baseURL = "http://localhost:8000"
+    private let baseURL = Config.backendBaseURL
     @Published var items: [ClothingItem] = []
     @Published var outfits: [Outfit] = []
-    
+
     func addItem(_ item: ClothingItem) async throws {
-        guard let url = URL(string: "\(baseURL)/items/") else { 
+        guard let url = URL(string: "\(baseURL)/items/") else {
             throw URLError(.badURL)
         }
-        
+
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
-        
-        let requestBody: [String: Any] = [
+
+        var requestBody: [String: Any] = [
             "type": item.type,
             "color": item.color,
             "dresscode": item.dresscode,
             "fit": item.fit
         ]
+        if let imageURL = item.imageURL {
+            requestBody["image_url"] = imageURL
+        }
         
         // Convert dictionary to JSON data
         let jsonData = try JSONSerialization.data(withJSONObject: requestBody)
@@ -99,16 +102,23 @@ class WardrobeService: ObservableObject {
         return (shirt: outfit.shirt, pants: outfit.pants)
     }
     
-   /* func removeItem(id: Int) async throws {
-        guard let url = URL(string: "\(baseURL)/items/\(id)") else { return }
-        
+    func removeItem(id: String) async throws {
+        guard let url = URL(string: "\(baseURL)/items/\(id)") else {
+            throw URLError(.badURL)
+        }
+
         var request = URLRequest(url: url)
         request.httpMethod = "DELETE"
-        
-        let (_, _) = try await URLSession.shared.data(for: request)
-        
+
+        let (_, response) = try await URLSession.shared.data(for: request)
+
+        guard let httpResponse = response as? HTTPURLResponse,
+              (200...299).contains(httpResponse.statusCode) else {
+            throw URLError(.badServerResponse)
+        }
+
         DispatchQueue.main.async {
             self.items.removeAll { $0.id == id }
         }
-    }*/
+    }
 }
