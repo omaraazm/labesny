@@ -45,26 +45,24 @@ struct OutfitCollageView: View {
         "\(shirt.color) \(shirt.type) \u{00B7} \(pants.color) \(pants.type)"
     }
 
+    // Slight negative spacing so the pants tuck just under the shirt hem,
+    // the way the mock stacks them - fixed max heights keep the overlap
+    // consistent regardless of each photo's aspect ratio.
     private var collage: some View {
-        ZStack {
-            if let pantsCutout {
-                Image(uiImage: pantsCutout)
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200)
-                    .rotationEffect(.degrees(4))
-                    .offset(y: 90)
-            }
+        VStack(spacing: -16) {
             if let shirtCutout {
                 Image(uiImage: shirtCutout)
                     .resizable()
                     .scaledToFit()
-                    .frame(width: 190)
-                    .rotationEffect(.degrees(-6))
-                    .offset(y: -40)
+                    .frame(maxWidth: 220, maxHeight: 200)
+            }
+            if let pantsCutout {
+                Image(uiImage: pantsCutout)
+                    .resizable()
+                    .scaledToFit()
+                    .frame(maxWidth: 200, maxHeight: 260)
             }
         }
-        .frame(height: 320)
     }
 
     private var fallbackLayout: some View {
