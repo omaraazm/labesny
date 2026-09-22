@@ -1,0 +1,16 @@
+# macOS
+.DS_Store
+
+# Xcode
+xcuserdata/
+*.xcuserstate
+*.xcscmblueprint
+
+# Python
+__pycache__/
+*.pyc
+.venv/
+
+# Backend runtime data
+backend/uploads/*
+!backend/uploads/.gitkeep
