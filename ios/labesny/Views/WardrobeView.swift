@@ -18,9 +18,11 @@ struct WardrobeView: View {
     let mainColor = Color(red: 0/255, green: 0/255, blue: 0/255)
     
     var body: some View {
-        NavigationStack {
-            ZStack {
-                mainColor.ignoresSafeArea()
+        // No NavigationStack here on purpose: this view is pushed from
+        // HomeView's stack, and nesting a second stack inside a pushed
+        // view breaks the pop transition.
+        ZStack {
+            mainColor.ignoresSafeArea()
                 
                 // Sidebar
                 HStack {
@@ -180,10 +182,9 @@ struct WardrobeView: View {
                 .offset(y: -20)
             }
             .blur(radius: showAddItemDrawer ? 3 : 0)
-            .sheet(isPresented: $showAddItemDrawer) {
-                AddItemDrawer(wardrobeService: wardrobeService, imageService: ImageService())
-                    .presentationDetents([.medium])
-            }
+        .sheet(isPresented: $showAddItemDrawer) {
+            AddItemDrawer(wardrobeService: wardrobeService, imageService: ImageService())
+                .presentationDetents([.medium])
         }
         .task {
             do {

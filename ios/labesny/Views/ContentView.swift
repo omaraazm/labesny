@@ -15,9 +15,11 @@ struct ContentView: View {
     var fetchFailed: Bool = false
 
     var body: some View {
-        NavigationStack {
-            ZStack {
-                mainColor.ignoresSafeArea()
+        // No NavigationStack here on purpose: this view is pushed from
+        // HomeView's stack, and nesting a second stack inside a pushed
+        // view breaks the pop transition.
+        ZStack {
+            mainColor.ignoresSafeArea()
                 VStack {
                     Image(systemName: "globe")
                         .imageScale(.large)
@@ -44,7 +46,6 @@ struct ContentView: View {
                     }
                 }
             }
-        }
     }
     struct ContentView_Previews: PreviewProvider {
         static var previews: some View {
