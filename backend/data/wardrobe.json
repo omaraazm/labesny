@@ -1,0 +1,152 @@
+[
+    {
+        "type": "shirt",
+        "color": "Yellow",
+        "code": "formal",
+        "fit": "oversized"
+    },
+    {
+        "type": "shirt",
+        "color": "green",
+        "code": "casual",
+        "fit": "regular"
+    },
+    {
+        "type": "pants",
+        "color": "green",
+        "code": "formal",
+        "fit": "slim"
+    },
+    {
+        "type": "pants",
+        "color": "YELLOW",
+        "code": "casual",
+        "fit": "oversized"
+    },
+    {
+        "type": "shirt",
+        "color": "green",
+        "code": "formal",
+        "fit": "slim"
+    },
+    {
+        "type": "shirt",
+        "color": "purple",
+        "code": "casual",
+        "fit": "oversized"
+    },
+    {
+        "type": "shirt",
+        "color": "white",
+        "code": "formal",
+        "fit": "regular"
+    },
+    {
+        "type": "shirt",
+        "color": "TEAL",
+        "code": "formal",
+        "fit": "oversized"
+    },
+    {
+        "type": "shirt",
+        "color": "red",
+        "code": "casual",
+        "fit": "regular"
+    },
+    {
+        "type": "shirt",
+        "color": "PURPLE",
+        "code": "formal",
+        "fit": "slim"
+    },
+    {
+        "type": "pants",
+        "color": "white",
+        "code": "casual",
+        "fit": "slim"
+    },
+    {
+        "type": "shirt",
+        "color": "PURPLE",
+        "code": "casual",
+        "fit": "regular"
+    },
+    {
+        "type": "pants",
+        "color": "blue",
+        "code": "formal",
+        "fit": "regular"
+    },
+    {
+        "type": "shirt",
+        "color": "PINK",
+        "code": "casual",
+        "fit": "oversized"
+    },
+    {
+        "type": "shirt",
+        "color": "BLACK",
+        "code": "casual",
+        "fit": "oversized"
+    },
+    {
+        "type": "shirt",
+        "color": "ORANGE",
+        "code": "formal",
+        "fit": "oversized"
+    },
+    {
+        "type": "shirt",
+        "color": "GREY",
+        "code": "casual",
+        "fit": "slim"
+    },
+    {
+        "type": "shirt",
+        "color": "white",
+        "code": "casual",
+        "fit": "regular"
+    },
+    {
+        "type": "shirt",
+        "color": "BLACK",
+        "code": "formal",
+        "fit": "regular"
+    },
+    {
+        "type": "shirt",
+        "color": "grey",
+        "code": "formal",
+        "fit": "slim"
+    },
+    {
+        "type": "shirt",
+        "color": "RED",
+        "code": "formal",
+        "fit": "slim"
+    },
+    {
+        "type": "shirt",
+        "color": "PINK",
+        "code": "formal",
+        "fit": "slim"
+    },
+    {
+        "type": "pants",
+        "color": "black",
+        "code": "formal",
+        "fit": "oversized"
+    },
+    {
+        "type": "pants",
+        "color": "blue",
+        "code": "casual",
+        "fit": "regular"
+    },
+    {
+        "type": "shirt",
+        "color": "BLACK",
+        "code": "casual",
+        "fit": "regular"
+    }
+]
