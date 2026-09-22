@@ -8,7 +8,7 @@
 import Foundation
 
 class WardrobeService: ObservableObject {
-    private let baseURL = Config.backendBaseURL
+    private let baseURL = Secrets.backendBaseURL
     @Published var items: [ClothingItem] = []
     @Published var outfits: [Outfit] = []
 

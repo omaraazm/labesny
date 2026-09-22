@@ -23,7 +23,7 @@ class ImageService {
         }
 
         // Create the URL for the upload endpoint
-        let url = URL(string: "\(Config.backendBaseURL)/upload-image/")!
+        let url = URL(string: "\(Secrets.backendBaseURL)/upload-image/")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
 
