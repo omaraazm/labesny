@@ -45,17 +45,17 @@
 			exceptions = (
 				4FACD47D2D59431F0086E4B4 /* Exceptions for "Code History" folder in "labesny" target */,
 			);
-			path = "Code History";
+			path = labesny;
 			sourceTree = "<group>";
 		};
 		4F88A0A42D08BC5000960FDF /* Code HistoryTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Code HistoryTests";
+			path = labesnyTests;
 			sourceTree = "<group>";
 		};
 		4F88A0AE2D08BC5000960FDF /* Code HistoryUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = "Code HistoryUITests";
+			path = labesnyUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -126,7 +126,7 @@
 			name = labesny;
 			packageProductDependencies = (
 			);
-			productName = "Code History";
+			productName = labesny;
 			productReference = 4F88A0902D08BC4E00960FDF /* labesny.app */;
 			productType = "com.apple.product-type.application";
 		};
@@ -149,7 +149,7 @@
 			name = labesnyTests;
 			packageProductDependencies = (
 			);
-			productName = "Code HistoryTests";
+			productName = labesnyTests;
 			productReference = 4F88A0A12D08BC5000960FDF /* labesnyTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
@@ -172,7 +172,7 @@
 			name = labesnyUITests;
 			packageProductDependencies = (
 			);
-			productName = "Code HistoryUITests";
+			productName = labesnyUITests;
 			productReference = 4F88A0AB2D08BC5000960FDF /* labesnyUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
@@ -334,7 +334,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "/Users/omaraboulazm/Documents/labesny/Code History/Code History/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/labesny/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -390,7 +390,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				INFOPLIST_FILE = "/Users/omaraboulazm/Documents/labesny/Code History/Code History/Info.plist";
+				INFOPLIST_FILE = "$(SRCROOT)/labesny/Info.plist";
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -403,10 +403,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Code History/Code_History.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "labesny/Code_History.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Code History/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"labesny/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L7QQW5WPQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -441,10 +441,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "Code History/Code_History.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "labesny/Code_History.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_ASSET_PATHS = "\"Code History/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"labesny/Preview Content\"";
 				DEVELOPMENT_TEAM = 9L7QQW5WPQ;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;

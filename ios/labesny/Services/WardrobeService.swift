@@ -21,7 +21,6 @@ class WardrobeService: ObservableObject {
         request.httpMethod = "POST"
         request.setValue("application/json", forHTTPHeaderField: "Content-Type")
         
-        // Create the request body with just the basic properties
         let requestBody: [String: Any] = [
             "type": item.type,
             "color": item.color,
