@@ -102,29 +102,35 @@ struct WardrobeView: View {
                     }
                     .padding(.horizontal)
                     */
+                    // Clears the globe/title header drawn in the layer above
                     Spacer()
-                                        
+                        .frame(height: 150)
+
                     // Grid of wardrobe item photos
                     ScrollView {
-                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                        LazyVGrid(
+                            columns: [GridItem(.flexible(), spacing: 12), GridItem(.flexible(), spacing: 12)],
+                            spacing: 12
+                        ) {
                             ForEach(wardrobeService.items) { item in
-                                Group {
+                                ZStack {
+                                    RoundedRectangle(cornerRadius: 12)
+                                        .fill(Color.white)
+
                                     if let imageURLString = item.imageURL, let imageURL = URL(string: imageURLString) {
                                         AsyncImage(url: imageURL) { image in
-                                            image.resizable().scaledToFill()
+                                            image.resizable().scaledToFit()
                                         } placeholder: {
-                                            Image(systemName: item.type == "shirt" ? "tshirt" : "skew")
-                                                .foregroundColor(.white)
+                                            ProgressView()
                                         }
+                                        .padding(8)
                                     } else {
                                         Image(systemName: item.type == "shirt" ? "tshirt" : "skew")
-                                            .foregroundColor(.white)
+                                            .font(.system(size: 44))
+                                            .foregroundColor(.black)
                                     }
                                 }
-                                .frame(maxWidth: .infinity)
-                                .aspectRatio(1, contentMode: .fill)
-                                .background(Color.white)
-                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .aspectRatio(1, contentMode: .fit)
                                 .contextMenu {
                                     Button(role: .destructive) {
                                         Task {
@@ -142,8 +148,6 @@ struct WardrobeView: View {
                         }
                         .padding(.horizontal)
                     }
-                    .offset(y: 20)
-                    .frame(maxHeight: 600)
                     
                     // Generate button
                     Button(action: {
