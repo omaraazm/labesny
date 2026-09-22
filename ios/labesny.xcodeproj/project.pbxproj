@@ -30,7 +30,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
-		4FACD47D2D59431F0086E4B4 /* Exceptions for "Code History" folder in "labesny" target */ = {
+		4FACD47D2D59431F0086E4B4 /* Exceptions for "labesny" folder in "labesny" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
 				Info.plist,
@@ -40,20 +40,20 @@
 /* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		4F88A0922D08BC4E00960FDF /* Code History */ = {
+		4F88A0922D08BC4E00960FDF /* labesny */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			exceptions = (
-				4FACD47D2D59431F0086E4B4 /* Exceptions for "Code History" folder in "labesny" target */,
+				4FACD47D2D59431F0086E4B4 /* Exceptions for "labesny" folder in "labesny" target */,
 			);
 			path = labesny;
 			sourceTree = "<group>";
 		};
-		4F88A0A42D08BC5000960FDF /* Code HistoryTests */ = {
+		4F88A0A42D08BC5000960FDF /* labesnyTests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = labesnyTests;
 			sourceTree = "<group>";
 		};
-		4F88A0AE2D08BC5000960FDF /* Code HistoryUITests */ = {
+		4F88A0AE2D08BC5000960FDF /* labesnyUITests */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
 			path = labesnyUITests;
 			sourceTree = "<group>";
@@ -88,9 +88,9 @@
 		4F88A0872D08BC4E00960FDF = {
 			isa = PBXGroup;
 			children = (
-				4F88A0922D08BC4E00960FDF /* Code History */,
-				4F88A0A42D08BC5000960FDF /* Code HistoryTests */,
-				4F88A0AE2D08BC5000960FDF /* Code HistoryUITests */,
+				4F88A0922D08BC4E00960FDF /* labesny */,
+				4F88A0A42D08BC5000960FDF /* labesnyTests */,
+				4F88A0AE2D08BC5000960FDF /* labesnyUITests */,
 				4F88A0912D08BC4E00960FDF /* Products */,
 			);
 			sourceTree = "<group>";
@@ -121,7 +121,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				4F88A0922D08BC4E00960FDF /* Code History */,
+				4F88A0922D08BC4E00960FDF /* labesny */,
 			);
 			name = labesny;
 			packageProductDependencies = (
@@ -144,7 +144,7 @@
 				4F88A0A32D08BC5000960FDF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				4F88A0A42D08BC5000960FDF /* Code HistoryTests */,
+				4F88A0A42D08BC5000960FDF /* labesnyTests */,
 			);
 			name = labesnyTests;
 			packageProductDependencies = (
@@ -167,7 +167,7 @@
 				4F88A0AD2D08BC5000960FDF /* PBXTargetDependency */,
 			);
 			fileSystemSynchronizedGroups = (
-				4F88A0AE2D08BC5000960FDF /* Code HistoryUITests */,
+				4F88A0AE2D08BC5000960FDF /* labesnyUITests */,
 			);
 			name = labesnyUITests;
 			packageProductDependencies = (
@@ -199,7 +199,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "CodeHistory" */;
+			buildConfigurationList = 4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "labesny" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -403,7 +403,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "labesny/Code_History.entitlements";
+				CODE_SIGN_ENTITLEMENTS = labesny/Code_History.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"labesny/Preview Content\"";
@@ -441,7 +441,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = "labesny/Code_History.entitlements";
+				CODE_SIGN_ENTITLEMENTS = labesny/Code_History.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"labesny/Preview Content\"";
@@ -563,7 +563,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "CodeHistory" */ = {
+		4F88A08B2D08BC4E00960FDF /* Build configuration list for PBXProject "labesny" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				4F88A0B32D08BC5000960FDF /* Debug */,

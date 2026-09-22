@@ -104,30 +104,28 @@ struct WardrobeView: View {
                     */
                     Spacer()
                                         
-                    // Scrollable list of items
-                    List {
-                        ForEach(wardrobeService.items) { item in
-                            HStack {
-                                if let imageURLString = item.imageURL, let imageURL = URL(string: imageURLString) {
-                                    AsyncImage(url: imageURL) { image in
-                                        image.resizable().scaledToFill()
-                                    } placeholder: {
+                    // Grid of wardrobe item photos
+                    ScrollView {
+                        LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
+                            ForEach(wardrobeService.items) { item in
+                                Group {
+                                    if let imageURLString = item.imageURL, let imageURL = URL(string: imageURLString) {
+                                        AsyncImage(url: imageURL) { image in
+                                            image.resizable().scaledToFill()
+                                        } placeholder: {
+                                            Image(systemName: item.type == "shirt" ? "tshirt" : "skew")
+                                                .foregroundColor(.white)
+                                        }
+                                    } else {
                                         Image(systemName: item.type == "shirt" ? "tshirt" : "skew")
                                             .foregroundColor(.white)
                                     }
-                                    .frame(width: 36, height: 36)
-                                    .clipped()
-                                } else {
-                                    Image(systemName: item.type == "shirt" ? "tshirt" : "skew")
-                                        .foregroundColor(.white)
-                                        .frame(width: 36, height: 36)
                                 }
-                                Text("\(item.fit) \(item.color) \(item.type) (\(item.dresscode))")
-                                    .font(.custom("Helvetica", size: 14))
-                                    .foregroundColor(.white)
-                            }
-                                .listRowBackground(Color.clear)
-                                .swipeActions {
+                                .frame(maxWidth: .infinity)
+                                .aspectRatio(1, contentMode: .fill)
+                                .background(Color.white)
+                                .clipShape(RoundedRectangle(cornerRadius: 12))
+                                .contextMenu {
                                     Button(role: .destructive) {
                                         Task {
                                             do {
@@ -140,10 +138,10 @@ struct WardrobeView: View {
                                         Label("Delete", systemImage: "trash")
                                     }
                                 }
+                            }
                         }
+                        .padding(.horizontal)
                     }
-                    .listStyle(.plain)
-                    .scrollContentBackground(.hidden)
                     .offset(y: 20)
                     .frame(maxHeight: 600)
                     
