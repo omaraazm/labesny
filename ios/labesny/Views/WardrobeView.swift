@@ -9,7 +9,7 @@ import SwiftUI
 
 struct WardrobeView: View {
     @StateObject private var wardrobeService = WardrobeService()
-    @StateObject private var weatherService = WeatherService.shared
+    @ObservedObject private var weatherService = WeatherService.shared
     @State private var temperature: Double = -20
     @State private var isSidebarOpen = false
     @State private var showAddItemDrawer = false

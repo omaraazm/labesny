@@ -1,7 +1,10 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var weatherService = WeatherService.shared
+    // @ObservedObject, not @StateObject: this view observes a shared
+    // singleton it doesn't own. @StateObject made several views each claim
+    // ownership of the same instance's lifecycle.
+    @ObservedObject private var weatherService = WeatherService.shared
     @State private var temperature: Double = -20
     @State private var event: String = ""
     @State private var location: String = ""

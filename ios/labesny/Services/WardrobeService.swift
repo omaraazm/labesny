@@ -7,6 +7,10 @@
 
 import Foundation
 
+// @MainActor for the same reason as WeatherService: @Published mutations
+// hopped onto the main queue mid-async-call can deadlock the main thread
+// when an observing view is being torn down at the same time.
+@MainActor
 class WardrobeService: ObservableObject {
     private let baseURL = Secrets.backendBaseURL
     @Published var items: [ClothingItem] = []
@@ -63,10 +67,8 @@ class WardrobeService: ObservableObject {
         }
         
         let newItem = try JSONDecoder().decode(ClothingItem.self, from: data)
-        
-        DispatchQueue.main.async {
-            self.items.append(newItem)
-        }
+
+        items.append(newItem)
     }
     
     func fetchItems() async throws {
@@ -74,10 +76,8 @@ class WardrobeService: ObservableObject {
         
         let (data, _) = try await URLSession.shared.data(from: url)
         let items = try JSONDecoder().decode([ClothingItem].self, from: data)
-        
-        DispatchQueue.main.async {
-            self.items = items
-        }
+
+        self.items = items
     }
     
     func fetchOutfits() async throws {
@@ -85,10 +85,8 @@ class WardrobeService: ObservableObject {
         
         let (data, _) = try await URLSession.shared.data(from: url)
         let outfits = try JSONDecoder().decode([Outfit].self, from: data)
-        
-        DispatchQueue.main.async {
-            self.outfits = outfits
-        }
+
+        self.outfits = outfits
     }
     
     func fetchRandomOutfit() async throws -> (shirt: ClothingItem, pants: ClothingItem) {
@@ -117,8 +115,6 @@ class WardrobeService: ObservableObject {
             throw URLError(.badServerResponse)
         }
 
-        DispatchQueue.main.async {
-            self.items.removeAll { $0.id == id }
-        }
+        items.removeAll { $0.id == id }
     }
 }

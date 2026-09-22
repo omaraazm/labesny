@@ -9,7 +9,7 @@ import SwiftUI
 
 // SwiftUI View
 struct CheckWeather: View {
-    @StateObject private var weatherService = WeatherService.shared
+    @ObservedObject private var weatherService = WeatherService.shared
     
     var body: some View {
         VStack {
