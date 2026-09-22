@@ -43,11 +43,6 @@ class ColorMatchingRules:
         return ColorConverter.is_valid_color(color)
     
     @staticmethod
-    def get_all_colors() -> List[str]:
-        """Get a list of all available colors."""
-        return list(ColorMatchingRules.compatible_colors.keys())
-    
-    @staticmethod
     def are_colors_identical(color1: str, color2: str) -> bool:
         """Check if both colours are identical"""
         return color1.lower() == color2.lower()

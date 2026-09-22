@@ -1,15 +1,14 @@
 from pydantic import BaseModel
-from typing import List, Optional, Tuple
-from uuid import UUID
+from typing import List, Optional
 
 
 class ClothingItemBase(BaseModel):
-    #id: UUID
+    id: Optional[str] = None
     type: str
     color: str
     dresscode: str
     fit: str
-    #image_url: Optional[str] = None
+    image_url: Optional[str] = None
 
 class Outfit(BaseModel):
     shirt: ClothingItemBase

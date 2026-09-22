@@ -18,18 +18,27 @@ wardrobe = WardrobeManager()
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
 
+def _item_to_base(item) -> ClothingItemBase:
+    return ClothingItemBase(
+        id=item.id,
+        type=item.type.value,
+        color=item.color,
+        dresscode=item.dresscode.value,
+        fit=item.fit.value,
+        image_url=item.image_url,
+    )
+
 @app.post("/items/", response_model=ClothingItemBase)
 async def add_item(item: ClothingItemBase):
     try:
         new_item = wardrobe.add_item(
-            #id=item.id,
             type=item.type,
             color=item.color,
             dresscode=item.dresscode,
-            fit=item.fit
-            #image_url=image_url
+            fit=item.fit,
+            image_url=item.image_url,
         )
-        return new_item
+        return _item_to_base(new_item)
     except Exception as e:
         logging.error(f"Error adding item: {str(e)}", exc_info=True)
         raise HTTPException(status_code=400, detail=str(e))
@@ -41,20 +50,20 @@ async def upload_image(file: UploadFile = File(...)):
         file_extension = file.filename.split(".")[-1]
         filename = f"{uuid.uuid4()}.{file_extension}"
         file_path = os.path.join(UPLOAD_DIR, filename)
-        
+
         # Save the file to the upload directory
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
-        
+
         # Generate a local URL (for testing purposes)
         image_url = f"http://localhost:8000/{UPLOAD_DIR}/{filename}"
-        
+
         return JSONResponse(content={"image_url": image_url})
     except Exception as e:
         return JSONResponse(status_code=500, content={"error": str(e)})
 
 @app.delete("/items/{item_id}")
-async def remove_item(item_id: int):
+async def remove_item(item_id: str):
     try:
         wardrobe.remove_item(item_id)
         return {"message": "Item removed successfully"}
@@ -69,42 +78,23 @@ async def get_items():
             status_code=404,
             detail="The wardrobe is empty. No items found."
         )
-    # Convert ClothingItem objects to dictionaries for serialization
-    return [
-        {
-            "type": item.type.value,
-            "color": item.color,
-            "dresscode": item.dresscode.value,
-            "fit": item.fit.value
-        }
-        for item in items
-    ]
+    return [_item_to_base(item) for item in items]
 
 @app.get("/outfits/", response_model=List[Outfit])
 async def get_matching_outfits():
     items = wardrobe.get_items()
     matching_outfits = find_matching_outfits(items)
-    
+
     if not matching_outfits:
         raise HTTPException(
             status_code=404,
             detail="No matching outfits found."
         )
-    
+
     return [
         Outfit(
-            shirt=ClothingItemBase(
-                type=shirt.type.value,
-                color=shirt.color,
-                dresscode=shirt.dresscode.value,
-                fit=shirt.fit.value
-            ),
-            pants=ClothingItemBase(
-                type=pants.type.value,
-                color=pants.color,
-                dresscode=pants.dresscode.value,
-                fit=pants.fit.value
-            ),
+            shirt=_item_to_base(shirt),
+            pants=_item_to_base(pants),
             score=score
         )
         for shirt, pants, score in matching_outfits
@@ -119,21 +109,11 @@ async def get_random_outfit():
             status_code=404,
             detail="No matching outfits found."
         )
-    
+
     shirt, pants, score = random_outfit
     return Outfit(
-        shirt=ClothingItemBase(
-            type=shirt.type.value,
-            color=shirt.color,
-            dresscode=shirt.dresscode.value,
-            fit=shirt.fit.value
-        ),
-        pants=ClothingItemBase(
-            type=pants.type.value,
-            color=pants.color,
-            dresscode=pants.dresscode.value,
-            fit=pants.fit.value
-        ),
+        shirt=_item_to_base(shirt),
+        pants=_item_to_base(pants),
         score=score
     )
 
@@ -142,30 +122,20 @@ async def get_best_outfit():
     """Returns the outfit with the highest score."""
     items = wardrobe.get_items()
     matching_outfits = find_matching_outfits(items)
-    
+
     if not matching_outfits:
         raise HTTPException(
             status_code=404,
             detail="No matching outfits found."
         )
-    
+
     # Get the outfit with the highest score
     best_outfit = max(matching_outfits, key=lambda x: x[2])
     shirt, pants, score = best_outfit
-    
+
     return Outfit(
-        shirt=ClothingItemBase(
-            type=shirt.type.value,
-            color=shirt.color,
-            dresscode=shirt.dresscode.value,
-            fit=shirt.fit.value
-        ),
-        pants=ClothingItemBase(
-            type=pants.type.value,
-            color=pants.color,
-            dresscode=pants.dresscode.value,
-            fit=pants.fit.value
-        ),
+        shirt=_item_to_base(shirt),
+        pants=_item_to_base(pants),
         score=score
     )
 
@@ -173,24 +143,16 @@ async def get_best_outfit():
 async def get_items_with_palettes():
     items = wardrobe.get_items()
     result = []
-    
+
     for item in items:
         rgb_color = ColorConverter.color_to_rgb(item.color)
         palettes = []
         if rgb_color:
             palettes = ColorConverter.find_color_palette(rgb_color)
-        
+
         result.append(ColorPalette(
-            item=ClothingItemBase(
-                type=item.type.value,
-                color=item.color,
-                dresscode=item.dresscode.value,
-                fit=item.fit.value
-            ),
+            item=_item_to_base(item),
             palettes=palettes
         ))
-    
+
     return result
-
-
-
