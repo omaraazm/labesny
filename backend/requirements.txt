@@ -6,5 +6,4 @@ webcolors
 pillow
 numpy
 palettable
-boto3
 requests

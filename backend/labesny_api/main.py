@@ -6,8 +6,8 @@ from .colors import ColorConverter
 import uuid
 from .models import ClothingItemBase, Outfit, ColorPalette
 import logging
-import boto3  # For AWS S3
 from fastapi.responses import JSONResponse
+from fastapi.staticfiles import StaticFiles
 import os
 
 app = FastAPI()
@@ -17,6 +17,10 @@ wardrobe = WardrobeManager()
 # Create a directory to store uploaded images
 UPLOAD_DIR = "uploads"
 os.makedirs(UPLOAD_DIR, exist_ok=True)
+
+# Serve the uploaded photos back out. Without this the URLs returned by
+# /upload-image/ point at files nothing is serving, so they 404.
+app.mount(f"/{UPLOAD_DIR}", StaticFiles(directory=UPLOAD_DIR), name="uploads")
 
 def _item_to_base(item) -> ClothingItemBase:
     return ClothingItemBase(
@@ -44,7 +48,7 @@ async def add_item(item: ClothingItemBase):
         raise HTTPException(status_code=400, detail=str(e))
 
 @app.post("/upload-image/")
-async def upload_image(file: UploadFile = File(...)):
+async def upload_image(request: Request, file: UploadFile = File(...)):
     try:
         # Generate a unique filename
         file_extension = file.filename.split(".")[-1]
@@ -55,8 +59,11 @@ async def upload_image(file: UploadFile = File(...)):
         with open(file_path, "wb") as buffer:
             buffer.write(await file.read())
 
-        # Generate a local URL (for testing purposes)
-        image_url = f"http://localhost:8000/{UPLOAD_DIR}/{filename}"
+        # Build the URL from the host the client actually used to reach us,
+        # so a phone on the LAN gets the LAN address rather than "localhost",
+        # which it can't resolve.
+        base = str(request.base_url).rstrip("/")
+        image_url = f"{base}/{UPLOAD_DIR}/{filename}"
 
         return JSONResponse(content={"image_url": image_url})
     except Exception as e:
