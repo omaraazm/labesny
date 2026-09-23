@@ -35,7 +35,7 @@ struct HomeView: View {
                     VStack(spacing: 32) {
                         ZStack {
                             NavigationLink(destination: WardrobeView()) {
-                                Image(systemName: "globe")
+                                Image(systemName: "cabinet")
                                     .imageScale(.large)
                             }
                         }

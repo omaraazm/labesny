@@ -9,7 +9,7 @@ struct LoginView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 5) {
-                Image(systemName: "globe")
+                Image(systemName: "cabinet")
                     .imageScale(.large)
                 Text("XXXXXXXX")
                     .font(.custom("Helvetica", size: 20))

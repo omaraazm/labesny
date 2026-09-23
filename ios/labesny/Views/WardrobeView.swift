@@ -104,7 +104,7 @@ struct WardrobeView: View {
                     }
                     .padding(.horizontal)
                     */
-                    // Clears the globe/title header drawn in the layer above
+                    // Clears the cabinet/title header drawn in the layer above
                     Spacer()
                         .frame(height: 150)
 
@@ -169,7 +169,7 @@ struct WardrobeView: View {
                 
                 // Logo and title positioned at the top
                 VStack {
-                    Image(systemName: "globe")
+                    Image(systemName: "cabinet")
                         .imageScale(.large)
                         .foregroundColor(.white)
                     Text("XXXXXXXX")

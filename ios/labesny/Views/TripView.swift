@@ -14,7 +14,7 @@ struct TripView: View {
                     // Main Content
                     VStack(spacing: 32) {
                         ZStack {
-                            Image(systemName: "globe")
+                            Image(systemName: "cabinet")
                                 .imageScale(.large)
                         }
                         .padding(40)
